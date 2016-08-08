@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+from gradient_daily.cli import generate
+
+if __name__ == '__main__':
+    generate()

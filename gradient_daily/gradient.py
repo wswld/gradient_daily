@@ -5,13 +5,22 @@ import math
 from PIL import Image, ImageFilter
 import random
 
-Y = 2024
-X = 2024
-im = Image.new('RGB', (X, Y))
+Y = 1080
+X = 1080
+im = Image.new('RGBA', (X, Y))
 ld = im.load()
 
 stages = [0, 0.2, 0.5, 0.8, 1.]
 
+def get_white_noise_image(width, height):
+    pil_map = Image.new("RGBA", (width, height))
+    random_grid = map(lambda x: (
+            int(random.random() * 256),
+            int(random.random() * 256),
+            int(random.random() * 256)
+        ), [0] * width * height)
+    pil_map.putdata(random_grid)
+    return pil_map
 
 def randcol():
     return [float(random.randint(1, 5)) / 10 for x in range(3)]
@@ -59,7 +68,7 @@ for y in range(im.size[1]):
 
 def produce():
     global im
-    for r in range(10):
-        # TODO: doesn't seem to smooth the image up
-        im.filter(ImageFilter.BLUR)
+    im = im.filter(ImageFilter.SMOOTH_MORE)
+    # applying some noise to get rid of banding
+    im = Image.blend(im, get_white_noise_image(X, Y), alpha=0.03)
     return im

@@ -3,8 +3,10 @@ import click
 import gradient_daily
 from gradient_daily.gradient import produce
 from src.Instagram import Instagram
+from datetime import date
 
 folder = os.path.abspath(os.curdir)
+
 
 @click.command()
 @click.option('--login', default=None, type=str, help='Instagram login.')
@@ -13,9 +15,10 @@ folder = os.path.abspath(os.curdir)
 @click.option('--debug', default=False, is_flag=True, help='Enables debug mode.')
 def generate(login, passwd, writepath, debug):
     """Command to create a gradient"""
-    caption = 'Gradient Daily ver. {}.\n' \
-              'GitHub: https://github.com/wswld/gradient_daily\n' \
-              '#gradient #gradientdaily'.format(gradient_daily.__version__) if not debug else ''
+    caption = \
+        '{}\n' \
+        'Gradient Daily ver. {}.\n' \
+        '#gradient #gradientdaily'.format(date.today(), gradient_daily.__version__) if not debug else ''
     if not login or not passwd:
         raise ValueError('Both login and password are required.')
     api = Instagram(login, passwd, False)

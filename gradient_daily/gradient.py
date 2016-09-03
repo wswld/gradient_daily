@@ -77,9 +77,9 @@ class Gradient(object):
         return pil_map
 
     def save(self, path):
-        self.img.save("/home/wswld/ololo.jpg", 'JPEG', subsampling=0, quality=95, optimize=True)
+        self.img.save(path, 'JPEG', subsampling=0, quality=95, optimize=True)
 
 
 if __name__ == '__main__':
-    gr = Gradient('RGBA', X, Y)
+    gr = Gradient()
     gr.save("/home/wswld/Code/gradient_daily/temp.jpg")

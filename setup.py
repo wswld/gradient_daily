@@ -2,7 +2,7 @@ from distutils.core import setup
 import gradient_daily
 
 config = {
-    'description': "I'm not sure what this is yet.",
+    'description': "Package to throw a random gradient at Instagram.",
     'author': 'wswld',
     'url': 'https://github.com/wswld/gradient_daily/',
     'author_email': 'wswld@yahoo.com',

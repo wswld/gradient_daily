@@ -1,11 +1,7 @@
-# Gradient Bot for Instagram
+# Daily Gradient Bot for Instagram
 
-This bot does just that - generates a gradient image and pushes it to Instagram.
+This bot does just that: it generates a gradient image and pushes it to Instagram ([@gradientdaily](https://www.instagram.com/gradientdaily/)).
 
-## Problem w/ Nonexistent Data File
+![Look, ma - gradient!](/example.jpg)
 
-Usually this is fixable with something like:
-
-``` sh
-mkdir .env/lib/python2.7/site-packages/src/data
-```
+*This image is resized, originally they are 1080x1080.*

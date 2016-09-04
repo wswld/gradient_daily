@@ -1,7 +1,7 @@
 import os
 import click
 import gradient_daily
-from gradient_daily.gradient import produce
+from gradient_daily.gradient import Gradient
 from src.Instagram import Instagram
 from datetime import date
 
@@ -24,7 +24,8 @@ def generate(login, passwd, writepath, debug):
     api = Instagram(login, passwd, False)
     api.login()
     filepath = os.path.join(writepath, 'temp.jpg')
-    produce().save(filepath, 'JPEG', subsampling=0, quality=95, optimize=True)
+    gr = Gradient()
+    gr.save(filepath)
     try:
         api.uploadPhoto(filepath, caption=caption)
     except Exception as e:

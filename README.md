@@ -11,7 +11,7 @@ This bot does just that: it generates a gradient image and pushes it to Instagra
 Since we're going to be using Pillow and other hardcore stuff, here's a list of dependencies:
 
 ``` bash
-sudo apt-get install libcurl4-openssl-dev python-dev libssl-dev libtiff5-dev libjpeg62-turbo-dev
+sudo apt-get install libcurl4-openssl-dev python-dev libssl-dev libtiff5-dev
 sudo apt-get install zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python-tk
 ```
 Then I usually do the following:

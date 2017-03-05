@@ -78,6 +78,7 @@ class Gradient(object):
 
     def save(self, path):
         self.img.save(path, 'JPEG', subsampling=0, quality=95, optimize=True)
+        self.img.close()
 
 
 if __name__ == '__main__':

@@ -36,7 +36,7 @@ class Gradient(object):
             int(random.random() * 256),
             int(random.random() * 256)
         ), [0] * width * height)
-        pil_map.putdata(random_grid)
+        pil_map.putdata(list(random_grid))
         return pil_map
 
     def save(self, path):

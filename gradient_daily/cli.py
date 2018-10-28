@@ -1,19 +1,22 @@
 import os
-import click
-import gradient_daily
-from gradient_daily.gradient import Gradient
-from src.Instagram import Instagram
 from datetime import date
+from io import BytesIO
 
-folder = os.path.abspath(os.curdir)
+import click
+from instagram_private_api import Client, ClientCompatPatch
+
+import gradient_daily
+from gradient_daily import gradient
+
+TEST_USER_NAME = 'testlogin'
+TEST_PASSWORD = 'testpasswd'
 
 
 @click.command()
-@click.option('--login', default=None, type=str, help='Instagram login.')
-@click.option('--passwd', default=None, type=str, help='Instagram password.')
-@click.option('--writepath', default=folder, type=str, help='Path to which the temp image file would be written.')
+@click.option('--login', default=TEST_USER_NAME, type=str, help='Instagram login.')
+@click.option('--passwd', default=TEST_PASSWORD, type=str, help='Instagram password.')
 @click.option('--debug', default=False, is_flag=True, help='Enables debug mode.')
-def generate(login, passwd, writepath, debug):
+def generate(login, passwd, debug):
     """Command to create a gradient"""
     caption = \
         '{}\n' \
@@ -21,15 +24,17 @@ def generate(login, passwd, writepath, debug):
         '#gradient #gradientdaily'.format(date.today(), gradient_daily.__version__) if not debug else ''
     if not login or not passwd:
         raise ValueError('Both login and password are required.')
-    api = Instagram(login, passwd, False)
+    api = Client(username=login, password=passwd)
     api.login()
-    filepath = os.path.join(writepath, 'temp.jpg')
-    gr = Gradient()
-    gr.save(filepath)
-    try:
-        api.uploadPhoto(filepath, caption=caption)
-    except Exception as e:
-        print e
+    gr = gradient.Gradient()
+    img = gr.img.convert('RGB')
+    with BytesIO() as stream:
+        img.save(stream, format="JPEG", subsampling=0, quality=95, optimize=True)
+        # stream.name = 'photo.jpeg'
+        try:
+            api.post_photo(photo_data=stream.getvalue(), size=(gradient.X, gradient.Y,), caption=caption)
+        except Exception as exc:
+            print(exc)
 
 
 if __name__ == '__main__':

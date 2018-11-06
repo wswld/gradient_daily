@@ -32,16 +32,4 @@ Then you should be able to run:
 
 That's it.
 
-## Common Problems
-
-- You may get a weird error about a `.dat` file. You may need to run:
-
-    ``` sh 
-    mkdir -p .env/lib/python2.7/site-packages/src/data/
-    ```
-
-    This is a dirty hack, I'm not sure why it's not created in the first place, but:
-
-    ![Ain't nobody got time for that!](http://i.giphy.com/bWM2eWYfN3r20.gif)
-
-- This code is not really RAM-efficient, so if you're running it on a 500Mb machine, time to create some swap.
+PS: This code is not really RAM-efficient, so if you're running it on a 500Mb machine, time to create some swap.

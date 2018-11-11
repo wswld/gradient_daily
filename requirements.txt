@@ -2,4 +2,3 @@ git+https://git@github.com/ping/instagram_private_api.git@1.5.7
 click==6.6
 Pillow>=3.3.2
 pycurl==7.43.0
-colour==0.1.2
